@@ -19,14 +19,15 @@ const login = async ({ email, password, env }) => {
         method: "POST",
       }
     ).then((res) => res.json());
-    console.log(loginRes);
     return loginRes;
-  } catch (_e) {
-    return false;
+  } catch (e) {
+    console.log(e);
+    return e;
   }
 };
 
 function init() {
+  const tokenBox = document.getElementById("token");
   document.getElementById("login_form").addEventListener("submit", (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -37,14 +38,19 @@ function init() {
     submit.disabled = true;
 
     login({ email, password, env })
-      .then(
-        ({
+      .then((res) => {
+        console.log(res, typeof res);
+        if (!res.success) {
+          tokenBox.innerHTML = res.message;
+          return;
+        }
+        const {
           data: {
             userDetails: { apiToken },
           },
-        }) => (document.getElementById("token").innerHTML = apiToken)
-      )
-      .catch((e) => console.log(e))
+        } = res;
+        tokenBox.innerHTML = apiToken;
+      })
       .finally(() => {
         submit.innerHTML = "Submit";
         submit.disabled = false;
@@ -55,4 +61,5 @@ function init() {
 window.addEventListener("load", function () {
   init();
 });
+
 
