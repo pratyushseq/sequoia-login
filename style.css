@@ -1,0 +1,71 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 16px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 48px;
+  text-align: left;
+  width: 400px;
+}
+
+form {
+  width: 400px;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
+.fields label {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+input {
+  font-size: inherit;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+}
+
+.radio {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+input[type="radio"] {
+  margin-top: 0;
+  margin-left: 16px;
+  margin-right: 8px;
+}
+
+button {
+  font-size: inherit;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  background-color: #fff;
+  cursor: pointer;
+  width: 100%;
+}
+
+#token {
+  height: 80px;
+  background-color: #eee;
+  width: 400px;
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}

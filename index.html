@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/fingerPrint.js"></script>
+    <script src="/script.js"></script>
+  </head>
+  <body>
+    <h1>Sequoia Login</h1>
+    <form id="login_form">
+      <div class="radio">
+        <label>Environment : </label>
+        <input type="radio" name="env" value="dev" id="dev" checked>
+        <label for="dev">Dev</label>
+        <input type="radio" name="env" value="stage" id="stage">
+        <label for="stage">Stage</label>
+      </div>
+      <div class="fields">
+        <label for="email" style="margin-top: 24px; margin-bottom: 8px;">Email</label>
+        <input type="email" id="email" name="email" placeholder="Email">
+        <label for="password" style="margin-top: 24px; margin-bottom: 8px;">Password</label>
+        <input type="password" id="password" name="password"
+          placeholder="Password">
+      </div>
+      <button id="submit" type="submit">Submit</button>
+    </form>
+    <div id="token">Token will come here</div>
+  </body>
+</html>
