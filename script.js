@@ -26,6 +26,18 @@ const login = async ({ email, password, env }) => {
   }
 };
 
+function innerHTMLToClipboard(token) {
+  navigator?.clipboard?.writeText?.(token).then(() => {
+    const messageBox = document.getElementById("message");
+    messageBox.innerHTML = "Copied to clipboard!";
+    messageBox.style.visibility = "visible";
+    setTimeout(() => {
+      messageBox.innerHTML = "";
+      messageBox.style.visibility = "hidden";
+    }, 2000);
+  });
+}
+
 function init() {
   const tokenBox = document.getElementById("token");
   document.getElementById("login_form").addEventListener("submit", (e) => {
@@ -39,7 +51,6 @@ function init() {
 
     login({ email, password, env })
       .then((res) => {
-        console.log(res, typeof res);
         if (!res.success) {
           tokenBox.innerHTML = res.message;
           return;
@@ -50,6 +61,7 @@ function init() {
           },
         } = res;
         tokenBox.innerHTML = apiToken;
+        innerHTMLToClipboard(apiToken);
       })
       .finally(() => {
         submit.innerHTML = "Submit";
@@ -61,5 +73,4 @@ function init() {
 window.addEventListener("load", function () {
   init();
 });
-
 
