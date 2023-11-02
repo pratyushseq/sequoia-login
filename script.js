@@ -1,3 +1,22 @@
+const envs = ["Dev", "Stage", "UAT", "Pre-Production", "Production"];
+
+const loadEnvs = () => {
+  const radio = document.querySelector(".radio");
+  const radioHTML = envs.reduce((acc, env) => {
+    const id = env.toLowerCase();
+    return (
+      acc +
+      `<span class="radio-group">
+        <input type="radio" name="env" value="${id}" id="${id}" ${
+        id === "dev" ? "checked" : ""
+      }>
+        <label for="${id}">${env}</label>
+      </span>`
+    );
+  }, "");
+  radio.innerHTML = radioHTML;
+};
+
 const login = async ({ email, password, env }) => {
   try {
     await fetch(
@@ -39,15 +58,21 @@ function innerHTMLToClipboard(token) {
 }
 
 function init() {
+  loadEnvs();
   const tokenBox = document.getElementById("token");
+  const copyButton = document.getElementById("copy-button");
+
   document.getElementById("login_form").addEventListener("submit", (e) => {
     e.preventDefault();
     e.stopPropagation();
     var formData = Object.fromEntries(new FormData(e.target));
     const { email, password, env } = formData;
     const submit = document.getElementById("submit");
-    submit.innerHTML = "Logging in...";
+    submit.innerHTML = "Fetching Token";
     submit.disabled = true;
+
+    tokenBox.innerHTML = "<span>&lt; Token will be displayed here &gt;</span>";
+    copyButton.style.display = "none";
 
     login({ email, password, env })
       .then((res) => {
@@ -61,6 +86,7 @@ function init() {
           },
         } = res;
         tokenBox.innerHTML = apiToken;
+        copyButton.style.display = "block";
         innerHTMLToClipboard(apiToken);
       })
       .finally(() => {
@@ -68,9 +94,15 @@ function init() {
         submit.disabled = false;
       });
   });
+
+  copyButton.addEventListener("click", () => {
+    const token = tokenBox.innerHTML;
+    innerHTMLToClipboard(token);
+  });
 }
 
 window.addEventListener("load", function () {
   init();
 });
+
 

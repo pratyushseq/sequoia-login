@@ -9,26 +9,29 @@
     <script src="/script.js"></script>
   </head>
   <body>
-    <h1>Sequoia Login</h1>
+    <h1>Sequoia Token Fetcher</h1>
     <form id="login_form">
+      <h4>Environment</h4>
       <div class="radio">
-        <label>Environment : </label>
         <input type="radio" name="env" value="dev" id="dev" checked>
         <label for="dev">Dev</label>
         <input type="radio" name="env" value="stage" id="stage">
         <label for="stage">Stage</label>
       </div>
       <div class="fields">
-        <label for="email" style="margin-top: 24px; margin-bottom: 8px;">Email</label>
+        <h4 for="email" style="margin-top: 24px; margin-bottom: 8px;">Email</h4>
         <input type="email" id="email" name="email" placeholder="Email">
-        <label for="password" style="margin-top: 24px; margin-bottom: 8px;">Password</label>
+        <h4 for="password" style="margin-top: 24px; margin-bottom: 8px;">Password</h4>
         <input type="password" id="password" name="password"
           placeholder="Password">
       </div>
       <button id="submit" type="submit">Submit</button>
     </form>
     <div class="container">
-      <div id="token"><span>&lt; Token will be displayed here &gt;</Token></span></div>
+      <div id="token">
+        <span>&lt; Token will be displayed here &gt;</span>
+      </div>
+      <span id="copy-button">Copy to Clipboard</span>
       <div id="message"></div>
     </div>
   </body>
